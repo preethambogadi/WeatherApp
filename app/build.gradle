@@ -1,0 +1,101 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+}
+
+android {
+    namespace 'com.example.weather'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.example.weather"
+        minSdk 24
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        buildConfigField "String", "WEATHER_API_KEY", "\"e2328fe6db5449f7db67cf8bfdaab212\""
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.0'
+    }
+}
+
+dependencies {
+
+    // Core Android libraries
+    implementation libs.androidx.core.ktx // Core Android functionality, Kotlin extensions
+    implementation libs.androidx.appcompat // Backwards compatibility for Android features
+    implementation libs.androidx.constraintlayout // UI layout library
+    implementation libs.material // Material Design UI components
+    implementation libs.androidx.activity.ktx // Provides lifecycle classes and other Activity related features
+
+    // Networking
+    implementation libs.retrofit // HTTP client for Android and Java
+    implementation libs.converter.gson // Converter for Retrofit to serialize and deserialize JSON
+    implementation libs.gson // Library to convert Java Objects into JSON and back
+    implementation libs.logging.interceptor // For logging the response
+
+    implementation libs.play.services.location // Location services
+    implementation libs.androidx.datastore.preferences // Data store
+
+    // ViewModel and LiveData
+    implementation libs.androidx.lifecycle.viewmodel.ktx // ViewModel helpers for managing UI-related data in a lifecycle-conscious way
+    implementation libs.lifecycle.livedata.ktx // LiveData helpers for managing observable data
+    implementation libs.androidx.runtime.livedata // Dependency for using observeAsState function in Jetpack Compose with LiveData
+
+    // Hilt (Dependency Injection)
+    implementation "com.google.dagger:hilt-android:2.44" // Hilt Android dependencies
+    kapt "com.google.dagger:hilt-compiler:2.44" // Hilt compiler
+
+    // Kotlin coroutines for async operations
+    implementation libs.kotlinx.coroutines.android
+
+    // compose
+    implementation libs.ui // Fundamental Compose UI library
+    implementation libs.androidx.material // Material Design components for Compose
+    implementation libs.ui.tooling // Tooling support for Compose
+    implementation libs.ui.tooling.preview // Preview support for Compose
+    implementation libs.androidx.lifecycle.runtime.ktx // Kotlin extensions for lifecycle-runtime
+    implementation libs.androidx.activity.compose.v172 // Compose support for activity
+
+    // Image loading library
+    implementation libs.coil.compose
+
+    // Testing
+    testImplementation libs.junit // JUnit for unit tests
+    androidTestImplementation libs.androidx.junit // AndroidX Test library for integration tests
+    testImplementation libs.mockk // Mocking library for Kotlin
+    testImplementation libs.kotlinx.coroutines.test // For testing Kotlin Coroutines
+    testImplementation libs.robolectric // Robolectric to run tests that simulate Android OS
+    testImplementation libs.androidx.core.testing // Testing utilities for LiveData and Architecture Components
+    // Mockito Core and Inline
+    testImplementation libs.mockito.core
+    testImplementation libs.mockito.inline
+    testImplementation libs.mockito.kotlin // Mockito Kotlin
+}

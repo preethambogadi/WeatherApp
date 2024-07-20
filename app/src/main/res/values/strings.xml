@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Weather</string>
+    <string name="enter_city_name_label">Enter city name</string>
+    <string name="search_label">Search</string>
+    <string name="location_not_found">Location not found for: %1$s</string>
+    <string name="unknown_error">An unknown error occurred</string>
+    <string name="enter_city_name">Please enter a city name</string>
+    <string name="malformed_data">Malformed data received from the server</string>
+    <string name="network_error">Network error occurred. Please check your connection.</string>
+    <string name="http_error">The request could not be completed due to an error. Please check your input or try again later.</string>
+    <string name="parsing_error">Error parsing data from the server</string>
+    <string name="show_permission_denied_message">Location permission is required to get current location weather</string>
+    <string name="show_location_error_message">Failed to get current location, please enter a city</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="visibility">Visibility</string>
+    <string name="clouds">Clouds</string>
+    <string name="rain">Rain</string>
+    <string name="mm_in_the_last_hour">%1$s mm in the last hour</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="state">State: %1$s</string>
+    <string name="condition">Condition: %1$s</string>
+    <string name="weather_in">Weather in %1$s, %2$s</string>
+    <string name="unknown_country">Unknown Country</string>
+    <string name="temperature_details">Temperature Details</string>
+    <string name="temperature">Temperature</string>
+    <string name="feels_like">Feels like</string>
+    <string name="min_temperature">Min Temperature</string>
+    <string name="max_temperature">Max Temperature</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="wind_gust">Wind Gust</string>
+    <string name="wind">Wind</string>
+    <string name="wind_details">Wind Details</string>
+</resources>
