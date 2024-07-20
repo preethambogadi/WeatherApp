@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.example.weather.model.CompleteWeatherData
 import com.example.weather.repo.WeatherRepo
-import com.example.weather.utils.LocationNotFoundException
+import com.example.weather.utils.exceptions.LocationNotFoundException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.cancel

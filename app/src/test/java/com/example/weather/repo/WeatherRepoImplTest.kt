@@ -1,8 +1,8 @@
 package com.example.weather.repo
 
 import com.example.weather.model.CompleteWeatherData
-import com.example.weather.utils.LocationNotFoundException
 import com.example.weather.utils.PreferencesManager
+import com.example.weather.utils.exceptions.LocationNotFoundException
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
