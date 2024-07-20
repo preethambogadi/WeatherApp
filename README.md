@@ -26,6 +26,6 @@ It leverages the OpenWeatherMap API to fetch weather data and displays it. The a
 - Mockito: For mocking dependencies in tests.
 
 ## Screenshot
-![Screenshot_20240720-173016](https://github.com/user-attachments/assets/e4150165-4591-4ab9-b1fe-8a1cd8313051)
+![Screenshot_20240720-173016](https://github.com/user-attachments/assets/b8abc834-b261-43e7-a134-d39ca746ca58)
 
 
