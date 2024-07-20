@@ -24,3 +24,7 @@ It leverages the OpenWeatherMap API to fetch weather data and displays it. The a
 - Coroutines: For asynchronous programming.
 - JUnit: For unit testing.
 - Mockito: For mocking dependencies in tests.
+
+## Screenshot
+![image](https://github.com/user-attachments/assets/a71fbb5c-0585-493e-a07e-8c6f2923af88)
+
