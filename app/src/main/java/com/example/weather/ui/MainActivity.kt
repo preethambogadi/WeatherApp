@@ -3,7 +3,6 @@ package com.example.weather.ui
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
@@ -39,19 +38,14 @@ class MainActivity : AppCompatActivity() {
         val fineLocationGranted = permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false)
         val coarseLocationGranted = permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false)
 
-        Log.d("MainActivity", "Permissions result: fineLocationGranted=$fineLocationGranted, coarseLocationGranted=$coarseLocationGranted")
-
         when {
             fineLocationGranted -> {
-                Log.d("MainActivity", "Fine location permission granted")
                 getLocationCoordinates()
             }
             coarseLocationGranted -> {
-                Log.d("MainActivity", "Coarse location permission granted")
                 getLocationCoordinates()
             }
             else -> {
-                Log.d("MainActivity", "Location permissions denied")
                 showPermissionDeniedMessage()
             }
         }
@@ -59,10 +53,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainActivity", "onCreate called")
 
-        // The setContent method is part of Jetpack Compose. It sets the UI for the activity using
-        // the provided composable function.
+        // Sets the UI for the activity using the provided composable function.
         setContent {
             WeatherAppScreen(viewModel)
         }
@@ -70,34 +62,33 @@ class MainActivity : AppCompatActivity() {
         useSavedCityOrRequestPermission()
     }
 
+    /**
+     * Uses the last saved city to fetch weather or requests location permission if no city is saved.
+     */
     private fun useSavedCityOrRequestPermission() {
         lifecycleScope.launch {
             preferencesManager.lastSearchedCity.collect { city ->
                 if (city.isNotEmpty()) {
-                    Log.d("MainActivity", "Using last searched city: $city")
                     viewModel.fetchWeather(city)
                 } else {
-                    Log.d("MainActivity", "No saved city found, requesting location permission")
                     checkAndRequestLocationPermission()
                 }
             }
         }
     }
 
+    /**
+     * Checks if location permissions are granted. If not, requests the necessary permissions.
+     */
     private fun checkAndRequestLocationPermission() {
-        Log.d("MainActivity", "Checking location permissions")
-
         when (PackageManager.PERMISSION_GRANTED) {
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) -> {
-                Log.d("MainActivity", "Fine location permission already granted")
                 getLocationCoordinates()
             }
             ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) -> {
-                Log.d("MainActivity", "Coarse location permission already granted")
                 getLocationCoordinates()
             }
             else -> {
-                Log.d("MainActivity", "Requesting location permissions")
                 requestPermissionLauncher.launch(
                     arrayOf(
                         Manifest.permission.ACCESS_FINE_LOCATION,
@@ -108,12 +99,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Gets the current location coordinates if permissions are granted.
+     */
     private fun getLocationCoordinates() {
-        Log.d("MainActivity", "Getting last known location")
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("MainActivity", "Location permissions not granted, cannot get location")
             return
         }
 
@@ -122,15 +113,12 @@ class MainActivity : AppCompatActivity() {
         fusedLocationClient.getCurrentLocation(Priority.PRIORITY_HIGH_ACCURACY, null)
             .addOnSuccessListener { location ->
                 location?.let {
-                    Log.d("MainActivity", "Location obtained: latitude=${it.latitude}, longitude=${it.longitude}, accuracy=${it.accuracy}")
                     viewModel.fetchWeatherByLocation(it.latitude, it.longitude)
                 } ?: run {
-                    Log.d("MainActivity", "Location is null")
                     showLocationErrorMessage()
                 }
             }
             .addOnFailureListener { exception ->
-                Log.e("MainActivity", "Failed to get location: ${exception.message}")
                 showLocationErrorMessage()
             }
     }
